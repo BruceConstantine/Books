@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta charset="UTF-8">
+    <title> 读"面向模式的软件架构1-模式系统"  </title>
+
+    <!-- Enable responsiveness on mobile devices-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+    <!-- icons -->
+    <link rel="shortcut icon" href="https://www.jtianling.com/public/images/favicon.ico">
+
+    <link rel="stylesheet" href="%E8%AF%BB'%E9%9D%A2%E5%90%91%E6%A8%A1%E5%BC%8F%E7%9A%84%E8%BD%AF%E4%BB%B6%E6%9E%B6%E6%9E%841-%E6%A8%A1%E5%BC%8F%E7%B3%BB%E7%BB%9F'_files/responsive.css">
+    <link href="%E8%AF%BB'%E9%9D%A2%E5%90%91%E6%A8%A1%E5%BC%8F%E7%9A%84%E8%BD%AF%E4%BB%B6%E6%9E%B6%E6%9E%841-%E6%A8%A1%E5%BC%8F%E7%B3%BB%E7%BB%9F'_files/font-awesome.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="%E8%AF%BB'%E9%9D%A2%E5%90%91%E6%A8%A1%E5%BC%8F%E7%9A%84%E8%BD%AF%E4%BB%B6%E6%9E%B6%E6%9E%841-%E6%A8%A1%E5%BC%8F%E7%B3%BB%E7%BB%9F'_files/main.css">
+    <link rel="stylesheet" href="%E8%AF%BB'%E9%9D%A2%E5%90%91%E6%A8%A1%E5%BC%8F%E7%9A%84%E8%BD%AF%E4%BB%B6%E6%9E%B6%E6%9E%841-%E6%A8%A1%E5%BC%8F%E7%B3%BB%E7%BB%9F'_files/pygments_style.css">
+
+    <!-- Meta information -->
+    <meta name="author" content="九天雁翎">
+    <meta http-equiv="refresh" content="80000">
+
+    
+    <meta name="description" content="该书把软件的设计模式分类分的更细, 在 GOF 设计模式上, 增加了一个架构模式, 在下面增加了一个 “成例”(Idiom), 也叫代码模式.  书中也算是理清了一些概念, 并给出了一些概念的定义, 但是整体看下来, 并不如 GOF ...">
+    
+
+    
+      <meta name="keywords" content="设计模式 and 软件架构">
+    
+
+    <!-- Schema.org meta tags for Google+ -->
+    <meta itemprop="name" content="九天雁翎的博客">
+    <meta itemprop="image" content="http://www.jtianling.com/public/images/logo.png">
+
+    
+    <meta itemprop="description" content="该书把软件的设计模式分类分的更细, 在 GOF 设计模式上, 增加了一个架构模式, 在下面增加了一个 “成例”(Idiom), 也叫代码模式.  书中也算是理清了一些概念, 并给出了一些概念的定义, 但是整体看下来, 并不如 GOF ...">
+    
+
+    <!-- feed links -->
+    <link rel="alternate" href="http://www.jtianling.com/feed" type="application/rss+xml" title="九天雁翎的博客">
+
+    <!-- Windows 8 Live Tile -->
+    <meta name="application-name" content="九天雁翎的博客">
+
+  <script async="" src="%E8%AF%BB'%E9%9D%A2%E5%90%91%E6%A8%A1%E5%BC%8F%E7%9A%84%E8%BD%AF%E4%BB%B6%E6%9E%B6%E6%9E%841-%E6%A8%A1%E5%BC%8F%E7%B3%BB%E7%BB%9F'_files/analytics.js"></script><script src="%E8%AF%BB'%E9%9D%A2%E5%90%91%E6%A8%A1%E5%BC%8F%E7%9A%84%E8%BD%AF%E4%BB%B6%E6%9E%B6%E6%9E%841-%E6%A8%A1%E5%BC%8F%E7%B3%BB%E7%BB%9F'_files/embed.js" data-timestamp="1569435447289"></script><style type="text/css">.MathJax_Preview {color: #888}
+#MathJax_Message {position: fixed; left: 1px; bottom: 2px; background-color: #E6E6E6; border: 1px solid #959595; margin: 0px; padding: 2px 8px; z-index: 102; color: black; font-size: 80%; width: auto; white-space: nowrap}
+#MathJax_MSIE_Frame {position: absolute; top: 0; left: 0; width: 0px; z-index: 101; border: 0px; margin: 0px; padding: 0px}
+.MathJax_Error {color: #CC0000; font-style: italic}
+</style><style id="fit-vids-style">.fluid-width-video-wrapper{width:100%;position:relative;padding:0;}.fluid-width-video-wrapper iframe,.fluid-width-video-wrapper object,.fluid-width-video-wrapper embed {position:absolute;top:0;left:0;width:100%;height:100%;}</style><link rel="prefetch" as="style" href="%E8%AF%BB'%E9%9D%A2%E5%90%91%E6%A8%A1%E5%BC%8F%E7%9A%84%E8%BD%AF%E4%BB%B6%E6%9E%B6%E6%9E%841-%E6%A8%A1%E5%BC%8F%E7%B3%BB%E7%BB%9F'_files/a_data/lounge.css"><link rel="prefetch" as="script" href="%E8%AF%BB'%E9%9D%A2%E5%90%91%E6%A8%A1%E5%BC%8F%E7%9A%84%E8%BD%AF%E4%BB%B6%E6%9E%B6%E6%9E%841-%E6%A8%A1%E5%BC%8F%E7%B3%BB%E7%BB%9F'_files/a_data/common.js"><link rel="prefetch" as="script" href="%E8%AF%BB'%E9%9D%A2%E5%90%91%E6%A8%A1%E5%BC%8F%E7%9A%84%E8%BD%AF%E4%BB%B6%E6%9E%B6%E6%9E%841-%E6%A8%A1%E5%BC%8F%E7%B3%BB%E7%BB%9F'_files/a_data/lounge_002.js"><link rel="prefetch" as="script" href="%E8%AF%BB'%E9%9D%A2%E5%90%91%E6%A8%A1%E5%BC%8F%E7%9A%84%E8%BD%AF%E4%BB%B6%E6%9E%B6%E6%9E%841-%E6%A8%A1%E5%BC%8F%E7%B3%BB%E7%BB%9F'_files/a_data_003/config.js"><script src="%E8%AF%BB'%E9%9D%A2%E5%90%91%E6%A8%A1%E5%BC%8F%E7%9A%84%E8%BD%AF%E4%BB%B6%E6%9E%B6%E6%9E%841-%E6%A8%A1%E5%BC%8F%E7%B3%BB%E7%BB%9F'_files/alfie.js" async="" charset="UTF-8"></script><style type="text/css">#MathJax_About {position: fixed; left: 50%; width: auto; text-align: center; border: 3px outset; padding: 1em 2em; background-color: #DDDDDD; color: black; cursor: default; font-family: message-box; font-size: 120%; font-style: normal; text-indent: 0; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; z-index: 201; border-radius: 15px; -webkit-border-radius: 15px; -moz-border-radius: 15px; -khtml-border-radius: 15px; box-shadow: 0px 10px 20px #808080; -webkit-box-shadow: 0px 10px 20px #808080; -moz-box-shadow: 0px 10px 20px #808080; -khtml-box-shadow: 0px 10px 20px #808080; filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='gray', Positive='true')}
+#MathJax_About.MathJax_MousePost {outline: none}
+.MathJax_Menu {position: absolute; background-color: white; color: black; width: auto; padding: 2px; border: 1px solid #CCCCCC; margin: 0; cursor: default; font: menu; text-align: left; text-indent: 0; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; z-index: 201; box-shadow: 0px 10px 20px #808080; -webkit-box-shadow: 0px 10px 20px #808080; -moz-box-shadow: 0px 10px 20px #808080; -khtml-box-shadow: 0px 10px 20px #808080; filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='gray', Positive='true')}
+.MathJax_MenuItem {padding: 2px 2em; background: transparent}
+.MathJax_MenuArrow {position: absolute; right: .5em; padding-top: .25em; color: #666666; font-size: .75em}
+.MathJax_MenuActive .MathJax_MenuArrow {color: white}
+.MathJax_MenuArrow.RTL {left: .5em; right: auto}
+.MathJax_MenuCheck {position: absolute; left: .7em}
+.MathJax_MenuCheck.RTL {right: .7em; left: auto}
+.MathJax_MenuRadioCheck {position: absolute; left: 1em}
+.MathJax_MenuRadioCheck.RTL {right: 1em; left: auto}
+.MathJax_MenuLabel {padding: 2px 2em 4px 1.33em; font-style: italic}
+.MathJax_MenuRule {border-top: 1px solid #CCCCCC; margin: 4px 1px 0px}
+.MathJax_MenuDisabled {color: GrayText}
+.MathJax_MenuActive {background-color: Highlight; color: HighlightText}
+.MathJax_MenuDisabled:focus, .MathJax_MenuLabel:focus {background-color: #E8E8E8}
+.MathJax_ContextMenu:focus {outline: none}
+.MathJax_ContextMenu .MathJax_MenuItem:focus {outline: none}
+#MathJax_AboutClose {top: .2em; right: .2em}
+.MathJax_Menu .MathJax_MenuClose {top: -10px; left: -10px}
+.MathJax_MenuClose {position: absolute; cursor: pointer; display: inline-block; border: 2px solid #AAA; border-radius: 18px; -webkit-border-radius: 18px; -moz-border-radius: 18px; -khtml-border-radius: 18px; font-family: 'Courier New',Courier; font-size: 24px; color: #F0F0F0}
+.MathJax_MenuClose span {display: block; background-color: #AAA; border: 1.5px solid; border-radius: 18px; -webkit-border-radius: 18px; -moz-border-radius: 18px; -khtml-border-radius: 18px; line-height: 0; padding: 8px 0 6px}
+.MathJax_MenuClose:hover {color: white!important; border: 2px solid #CCC!important}
+.MathJax_MenuClose:hover span {background-color: #CCC!important}
+.MathJax_MenuClose:hover:focus {outline: none}
+</style><style type="text/css">#MathJax_Zoom {position: absolute; background-color: #F0F0F0; overflow: auto; display: block; z-index: 301; padding: .5em; border: 1px solid black; margin: 0; font-weight: normal; font-style: normal; text-align: left; text-indent: 0; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; -webkit-box-sizing: content-box; -moz-box-sizing: content-box; box-sizing: content-box; box-shadow: 5px 5px 15px #AAAAAA; -webkit-box-shadow: 5px 5px 15px #AAAAAA; -moz-box-shadow: 5px 5px 15px #AAAAAA; -khtml-box-shadow: 5px 5px 15px #AAAAAA; filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='gray', Positive='true')}
+#MathJax_ZoomOverlay {position: absolute; left: 0; top: 0; z-index: 300; display: inline-block; width: 100%; height: 100%; border: 0; padding: 0; margin: 0; background-color: white; opacity: 0; filter: alpha(opacity=0)}
+#MathJax_ZoomFrame {position: relative; display: inline-block; height: 0; width: 0}
+#MathJax_ZoomEventTrap {position: absolute; left: 0; top: 0; z-index: 302; display: inline-block; border: 0; padding: 0; margin: 0; background-color: white; opacity: 0; filter: alpha(opacity=0)}
+</style></head>
+  <body><div id="MathJax_Message" style="display: none;"></div>
+    <div class="container">
+      <header class="center" id="main">
+        <a id="logo" href="https://www.jtianling.com/" title="九天雁翎的博客"></a>
+        <div class="sitename">九天雁翎的博客</div>
+        <div class="tagline">如果你想在软件业获得成功，就使用你知道的最强大的语言，用它解决你知道的最难的问题，并且等待竞争对手的经理做出自甘平庸的选择。 -- Paul Graham</div>
+        <br>
+
+        <nav>
+          <a href="https://www.jtianling.com/" title="九天雁翎的博客">首页</a>
+          <a href="https://www.jtianling.com/programming.html" title="编程">编程</a>
+          <a href="https://www.jtianling.com/essay.html" title="随笔">随笔</a>
+          <a href="https://www.jtianling.com/archive.html" title="所有文章">所有文章</a>
+          <a href="http://www.hortorgames.com/" title="疯狂游戏">疯狂游戏</a>
+
+          <div id="social">
+          <a>
+            <form action="https://google.com/search" method="get">
+              <fieldset role="search">
+                <input type="hidden" name="q" value="site:www.jtianling.com">
+                <input class="search" type="text" name="q" results="0" placeholder="搜索本站">
+              </fieldset>
+            </form>
+          </a>
+
+            <a href="http://weibo.com/jtianlingblog"><i class="fa fa-weibo"></i></a>
+            <a href="http://github.com/jtianling"><i class="fa fa-github"></i></a>
+            <a href="mailto:jtianling@gmail.com"><i class="fa fa-envelope"></i></a>
+            <a href="https://www.jtianling.com/feed.xml"><i class="fa fa-rss"></i></a>
+          </div>
+        </nav>
+      </header>
+
+      <main>
+        <section class="posts">
+  <article>
+    <header class="center">
+      <time>2018年02月28日</time>
+      <h1><a href="https://www.jtianling.com/review-of-a-system-of-patterns.html">读"面向模式的软件架构1-模式系统"</a></h1>
+    </header>
+    <p>该书把软件的设计模式分类分的更细, 在 GOF 设计模式上, 增加了一个架构模式, 在下面增加了一个 “成例”(Idiom), 也叫代码模式.  <br>
+书中也算是理清了一些概念, 并给出了一些概念的定义, 但是整体看下来, 并不如 GOF 的设计模式那么经典, 特别是模式的选择上, 要么是一个分类只提供1个模式, 要么是我感觉一些所谓的模式根本不足以支撑这个分类, 还有的模式横跨了几个分类…
+另外, 看了这本书后远不如看GOF的书后那种大呼过瘾的感觉, 而是感觉世间的设计模式只有一种–增加中间层</p>
+
+<!-- more -->
+
+<p><img src="%E8%AF%BB'%E9%9D%A2%E5%90%91%E6%A8%A1%E5%BC%8F%E7%9A%84%E8%BD%AF%E4%BB%B6%E6%9E%B6%E6%9E%841-%E6%A8%A1%E5%BC%8F%E7%B3%BB%E7%BB%9F'_files/mindmap-of-a-system-of-patterns.png" alt="面向模式的软件架构1-模式系统一书的思维导图"></p>
+
+
+
+    <!--
+    <p>
+      顺便发一条<a href="/employment.html" title="公司招聘" >公司招聘</a>的信息, 有兴趣的可以联系我.
+    </p>
+
+    <div class="center"> 扫描二维码, 关注作者.</div>
+    <img src="/public/images/qrcode-258.jpg" alt="微信公众号: 程序即人生">
+    -->
+
+    <p>
+    分类:&nbsp;
+    
+    <a href="https://www.jtianling.com/categories.html#%E9%98%85%E8%AF%BB" class="category">阅读&nbsp;</a>
+    
+    <br>
+    标签:&nbsp;
+    
+    <a href="https://www.jtianling.com/tags.html#%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F" class="tag">设计模式&nbsp;</a>
+    
+    <a href="https://www.jtianling.com/tags.html#%E8%BD%AF%E4%BB%B6%E6%9E%B6%E6%9E%84" class="tag">软件架构&nbsp;</a>
+    
+    </p>
+
+    <div class="sign">
+      <p> Posted By 九天雁翎 at <a href="https://www.jtianling.com/review-of-a-system-of-patterns.html">九天雁翎的博客</a> on 2018年02月28日</p>
+    </div>
+
+    <div>
+      
+      <a href="https://www.jtianling.com/review-of-use-your-head.html" class="nav_previous" title="读" 启动大脑""="">前一篇: 读"启动大脑"</a>
+      
+      
+      <a href="https://www.jtianling.com/private-module-in-golang.html" class="nav_next" title="写一个自己的Golang Module(Golang1.11以后版本支持)">后一篇: 写一个自己的Golang Module(Golang1.11以后版本支持)</a>
+      
+    </div>
+
+      
+      <div id="disqus_thread"><iframe id="dsq-app9561" name="dsq-app9561" allowtransparency="true" scrolling="no" tabindex="0" title="Disqus" style="width: 1px !important; min-width: 100% !important; border: medium none !important; overflow: hidden !important; height: 568px !important;" src="%E8%AF%BB'%E9%9D%A2%E5%90%91%E6%A8%A1%E5%BC%8F%E7%9A%84%E8%BD%AF%E4%BB%B6%E6%9E%B6%E6%9E%841-%E6%A8%A1%E5%BC%8F%E7%B3%BB%E7%BB%9F'_files/a.html" horizontalscrolling="no" verticalscrolling="no" width="100%" frameborder="0"></iframe></div>
+      <script>
+
+        /**
+         *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+         *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+        /*
+          var disqus_config = function () {
+          this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+          this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+          };
+         */
+        (function() { // DON'T EDIT BELOW THIS LINE
+          var d = document, s = d.createElement('script');
+          s.src = 'https://jtianling.disqus.com/embed.js';
+          s.setAttribute('data-timestamp', +new Date());
+          (d.head || d.body).appendChild(s);
+        })();
+      </script>
+      <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+                            
+      
+
+  </article>
+
+
+</section>
+
+      </main>
+
+      <footer class="center">
+        <p>
+        本作品由<a xmlns:cc="http://creativecommons.org/ns#" href="http://www.jtianling.com/" property="cc:attributionName" rel="cc:attributionURL">九天雁翎</a>创作，采用<a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可。
+        </p>
+      </footer>
+    </div>
+
+    <script type="text/javascript" async="" src="%E8%AF%BB'%E9%9D%A2%E5%90%91%E6%A8%A1%E5%BC%8F%E7%9A%84%E8%BD%AF%E4%BB%B6%E6%9E%B6%E6%9E%841-%E6%A8%A1%E5%BC%8F%E7%B3%BB%E7%BB%9F'_files/MathJax.js">
+    </script>
+    <script src="%E8%AF%BB'%E9%9D%A2%E5%90%91%E6%A8%A1%E5%BC%8F%E7%9A%84%E8%BD%AF%E4%BB%B6%E6%9E%B6%E6%9E%841-%E6%A8%A1%E5%BC%8F%E7%B3%BB%E7%BB%9F'_files/jquery.js"></script>
+    <script src="%E8%AF%BB'%E9%9D%A2%E5%90%91%E6%A8%A1%E5%BC%8F%E7%9A%84%E8%BD%AF%E4%BB%B6%E6%9E%B6%E6%9E%841-%E6%A8%A1%E5%BC%8F%E7%B3%BB%E7%BB%9F'_files/jquery_002.js"></script>
+    <script>
+    $(document).ready(function(){
+      $("article").fitVids();
+    });
+    </script>
+
+    <script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+ (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+ })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-25249912-1', 'jtianling.com');
+ga('send', 'pageview');
+
+    </script>
+    <script type="text/javascript" src="http://tajs.qq.com/stats?sId=10117449" charset="UTF-8"></script>
+  
+
+<iframe style="display: none;"></iframe><iframe id="dsq-app9564" name="dsq-app9564" allowtransparency="true" scrolling="no" tabindex="0" title="Disqus" style="width: 1px !important; min-width: 100% !important; border: medium none !important; overflow: hidden !important; height: 100% !important; position: fixed !important; inset: 0px 0px auto auto !important; z-index: 2147483647 !important; display: none !important;" src="%E8%AF%BB'%E9%9D%A2%E5%90%91%E6%A8%A1%E5%BC%8F%E7%9A%84%E8%BD%AF%E4%BB%B6%E6%9E%B6%E6%9E%841-%E6%A8%A1%E5%BC%8F%E7%B3%BB%E7%BB%9F'_files/a_003.html" width="100%" frameborder="0"></iframe></body></html>
